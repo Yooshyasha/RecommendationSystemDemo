@@ -12,10 +12,7 @@ import java.util.*
 import javax.crypto.SecretKey
 
 @Component
-class JwtUtil(
-    private val passwordEncoder: BCryptPasswordEncoder,
-    private val usersService: UsersService,
-) {
+class JwtUtil {
     @Value("\${jwt.secret}")
     private lateinit var SECRET: String
 
