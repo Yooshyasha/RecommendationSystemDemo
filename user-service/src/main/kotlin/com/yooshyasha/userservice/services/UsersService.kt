@@ -20,4 +20,12 @@ class UsersService(
     fun usernameExists(username: String): Boolean {
         return usersRepository.existsByName(username)
     }
+
+    fun save(user: User): User {
+        return usersRepository.save(user)
+    }
+
+    fun update(user: User): User {
+        return usersRepository.save(user)
+    }
 }
