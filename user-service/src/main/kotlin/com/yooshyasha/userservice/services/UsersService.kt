@@ -2,6 +2,8 @@ package com.yooshyasha.userservice.services
 
 import com.yooshyasha.userservice.entities.User
 import com.yooshyasha.userservice.repos.UsersRepository
+import org.springframework.security.core.context.SecurityContextHolder
+import org.springframework.security.core.userdetails.UsernameNotFoundException
 import org.springframework.stereotype.Service
 import java.util.*
 
@@ -27,5 +29,13 @@ class UsersService(
 
     fun update(user: User): User {
         return usersRepository.save(user)
+    }
+
+    fun getMe(): User {
+        val username = SecurityContextHolder.getContext().authentication.name
+        val user = getUserByUsername(username)
+            ?: throw UsernameNotFoundException("User not found")
+
+        return user
     }
 }
