@@ -3,8 +3,8 @@ package com.yooshyasha.userservice.dto
 import com.yooshyasha.userservice.entities.User
 
 data class UserDTO(
-    val username: String,
+    val name: String,
     val email: String? = "",
 ) {
-    constructor(user: User) : this(username = user.username, email = user.email)
+    constructor(user: User) : this(name = user.username, email = user.email)
 }
