@@ -1,5 +1,6 @@
 package com.yooshyasha.videoservice.entity
 
+import com.yooshyasha.videoservice.enums.VideoStatus
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
@@ -17,4 +18,6 @@ data class Video(
     val title: String? = null,
     val description: String? = null,
     val fileUrl: String? = null,
+
+    val status: VideoStatus = VideoStatus.UPLOADING
 )
