@@ -15,9 +15,10 @@ class VideoServicePublishService(
     private val usersService: UsersService,
 ) {
     fun publishVideo(video: Video, file: MultipartFile): Boolean {
-        s3Service.uploadFile(file)
+        val fileUrl = s3Service.uploadFile(file)
 
         video.status = VideoStatus.PUBLISHED
+        video.fileUrl = fileUrl
         saveVideo(video)
 
         return true

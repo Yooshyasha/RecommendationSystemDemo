@@ -17,7 +17,7 @@ data class Video(
     val authorId: UUID? = null,
     val title: String? = null,
     val description: String? = null,
-    val fileUrl: String? = null,
+    var fileUrl: String? = null,
 
     var status: VideoStatus = VideoStatus.UPLOADING
 )
