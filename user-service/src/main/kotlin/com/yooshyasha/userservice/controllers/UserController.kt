@@ -40,4 +40,16 @@ class UserController(
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build()
         }
     }
+
+    @GetMapping("/name/{username}")
+    fun getUserByUsername(@PathVariable username: String): ResponseEntity<UserDTO> {
+        try {
+            val user = usersService.getUserByUsername(username)
+
+            return ResponseEntity.ok(UserDTO(user!!))
+        } catch (e: Exception) {
+            LoggerFactory.getLogger(this.javaClass).error("Error occurred while getting user info", e)
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build()
+        }
+    }
 }
