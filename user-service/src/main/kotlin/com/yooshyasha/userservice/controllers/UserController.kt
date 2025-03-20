@@ -1,7 +1,6 @@
 package com.yooshyasha.userservice.controllers
 
 import com.yooshyasha.userservice.dto.UserDTO
-import com.yooshyasha.userservice.entities.User
 import com.yooshyasha.userservice.services.UsersService
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
