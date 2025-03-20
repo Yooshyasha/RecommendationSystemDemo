@@ -11,4 +11,8 @@ class UsersService(
     fun getMe(token: String) : UserBO {
         return usersServiceClient.getMe(token)
     }
+
+    fun getUserByUsername(username: String) : UserBO {
+        return usersServiceClient.getUserByUsername(username)
+    }
 }
