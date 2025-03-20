@@ -1,10 +1,12 @@
 package com.yooshyasha.userservice.dto
 
 import com.yooshyasha.userservice.entities.User
+import java.util.UUID
 
 data class UserDTO(
-    val username: String,
+    val id: UUID,
+    val name: String,
     val email: String? = "",
 ) {
-    constructor(user: User) : this(username = user.username, email = user.email)
+    constructor(user: User) : this(id = user.id!!, name = user.username, email = user.email)
 }
