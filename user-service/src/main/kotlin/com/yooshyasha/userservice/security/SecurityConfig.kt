@@ -26,6 +26,7 @@ class SecurityConfig(
                 it.requestMatchers("/v1/auth/**").permitAll()
                 it.requestMatchers("/healthcheck/**", "/health/**").permitAll()
                 it.requestMatchers("/docs", "/api-docs", "/swagger-ui/**").permitAll()
+                it.requestMatchers("/v1/users/name/**").permitAll()
                 it.anyRequest().authenticated()
             }
             .addFilterAt(jwtAuthFilter, UsernamePasswordAuthenticationFilter::class.java)
