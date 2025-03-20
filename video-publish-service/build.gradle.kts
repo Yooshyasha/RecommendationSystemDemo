@@ -35,6 +35,18 @@ dependencies {
     testImplementation("org.springframework.security:spring-security-test")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 
+    // https://mvnrepository.com/artifact/software.amazon.awssdk/s3
+    implementation("software.amazon.awssdk:s3:2.31.1")
+
+    // https://mvnrepository.com/artifact/software.amazon.awssdk/sso
+    implementation("software.amazon.awssdk:sso:2.31.1")
+
+    // https://mvnrepository.com/artifact/software.amazon.awssdk/ssooidc
+    implementation("software.amazon.awssdk:ssooidc:2.31.1")
+
+    // https://mvnrepository.com/artifact/software.amazon.awssdk/apache-client
+    implementation("software.amazon.awssdk:apache-client:2.31.1")
+
     // https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt-api
     implementation("io.jsonwebtoken:jjwt-api:0.12.6")
 

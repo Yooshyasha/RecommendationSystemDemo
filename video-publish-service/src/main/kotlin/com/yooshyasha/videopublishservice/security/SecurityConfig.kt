@@ -14,6 +14,7 @@ class SecurityConfig {
         http
             .csrf { it.disable() }
             .authorizeHttpRequests {
+                it.requestMatchers("/v1/publish/video").authenticated()
                 it.anyRequest().permitAll()
             }
 
