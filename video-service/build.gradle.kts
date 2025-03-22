@@ -60,6 +60,8 @@ dependencies {
 
     // https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-openfeign
     implementation("org.springframework.cloud:spring-cloud-starter-openfeign:4.2.0")
+
+    implementation("io.minio:minio:8.5.17")
 }
 
 dependencyManagement {
