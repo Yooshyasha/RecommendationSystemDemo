@@ -8,14 +8,17 @@ import org.springframework.web.multipart.MultipartFile
 
 @Service
 class VideoPublishService(
-    val template: KafkaTemplate<String, RequestPublishVideo>
+    private val template: KafkaTemplate<String, RequestPublishVideo>,
+    private val tempStorageService: TempStorageService,
 ) {
     fun publishVideo(video: Video, file: MultipartFile) {
+        val url = tempStorageService.saveVideo(file)
+
         val requestData = RequestPublishVideo(
-            videoId=video.id!!,
-            file=file,
+            videoId = video.id!!,
+            fileURL = url
         )
 
-        template.send("topic1", requestData)
+        template.send("publish-video", requestData)
     }
 }
