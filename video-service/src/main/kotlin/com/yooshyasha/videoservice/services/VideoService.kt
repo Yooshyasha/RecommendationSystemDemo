@@ -50,4 +50,8 @@ class VideoService(
     fun saveVideo(video: Video) {
         videoRepository.save(video)
     }
+
+    fun getAllVideos(): Collection<Video> {
+        return videoRepository.findAll()
+    }
 }

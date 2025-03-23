@@ -6,6 +6,7 @@ import com.yooshyasha.videoservice.services.VideoService
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
@@ -26,6 +27,19 @@ class VideoController(
             )
 
             return ResponseEntity.ok(video)
+        } catch (ex: Exception) {
+            LoggerFactory.getLogger(this.javaClass).error(ex.message, ex)
+
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build()
+        }
+    }
+
+    @GetMapping
+    fun getVideos(): ResponseEntity<Collection<Video>> {
+        try {
+            val videos = videoService.getAllVideos()
+
+            return ResponseEntity.ok(videos)
         } catch (ex: Exception) {
             LoggerFactory.getLogger(this.javaClass).error(ex.message, ex)
 
