@@ -32,4 +32,18 @@ class S3Service(
 
         return "$endpoint/$bucket/$fileName"
     }
+
+    fun uploadFile(fileBytes: ByteArray): String {
+        val fileName = "file_${UUID.randomUUID()}"
+
+        s3Client.putObject(
+            PutObjectRequest.builder()
+                .bucket(bucket)
+                .key(fileName)
+                .build(),
+            RequestBody.fromBytes(fileBytes)
+        )
+
+        return "$endpoint/$bucket/$fileName"
+    }
 }

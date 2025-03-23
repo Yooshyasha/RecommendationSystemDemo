@@ -4,7 +4,9 @@ import com.yooshyasha.videopublishservice.minio.FileDTO
 import io.minio.GetObjectArgs
 import io.minio.MinioClient
 import org.springframework.beans.factory.annotation.Value
+import org.springframework.stereotype.Service
 
+@Service
 class TempStorageService(
     private val minioClient: MinioClient,
 ) {

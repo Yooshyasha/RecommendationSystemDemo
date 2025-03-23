@@ -13,6 +13,7 @@ class VideoServicePublishService(
     private val videoRepository: VideoRepository,
     private val s3Service: S3Service,
     private val usersService: UsersService,
+    private val tempStorageService: TempStorageService,
 ) {
     fun publishVideo(video: Video, file: MultipartFile): Boolean {
         val fileUrl = s3Service.uploadFile(file)
@@ -28,6 +29,28 @@ class VideoServicePublishService(
         val video = videoRepository.findById(videoId).orElseThrow()
 
         return publishVideo(video, file)
+    }
+
+    fun publishVideo(video: Video, fileBytes: ByteArray): Boolean {
+        val fileUrl = s3Service.uploadFile(fileBytes)
+
+        video.status = VideoStatus.PUBLISHED
+        video.fileUrl = fileUrl
+        saveVideo(video)
+
+        return true
+    }
+
+    fun publishVideo(videoId: UUID, fileBytes: ByteArray): Boolean {
+        val video = videoRepository.findById(videoId).orElseThrow()
+
+        return publishVideo(video, fileBytes)
+    }
+
+    fun publishVideo(videoId: UUID, tempFileURL: String): Boolean {
+        val fileBytes = tempStorageService.getFile(tempFileURL)
+
+        return publishVideo(videoId, fileBytes.bytes)
     }
 
     fun saveVideo(video: Video) {
