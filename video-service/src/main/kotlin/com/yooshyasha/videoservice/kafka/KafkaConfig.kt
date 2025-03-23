@@ -23,7 +23,6 @@ class KafkaConfig {
     @Bean
     fun producerFactory(): ProducerFactory<String, RequestPublishVideo> {
         val jsonSerializer = JsonSerializer<RequestPublishVideo>()
-        jsonSerializer.isAddTypeInfo = true
 
         val config = HashMap<String, Any>()
         config[ProducerConfig.BOOTSTRAP_SERVERS_CONFIG] = bootstrapServers
