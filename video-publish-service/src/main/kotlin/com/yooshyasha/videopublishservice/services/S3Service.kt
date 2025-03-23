@@ -1,4 +1,4 @@
-package com.yooshyasha.videoservice.services
+package com.yooshyasha.videopublishservice.services
 
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Service
@@ -28,6 +28,20 @@ class S3Service(
                 .key(fileName)
                 .build(),
             RequestBody.fromBytes(file.bytes)
+        )
+
+        return "$endpoint/$bucket/$fileName"
+    }
+
+    fun uploadFile(fileBytes: ByteArray): String {
+        val fileName = "file_${UUID.randomUUID()}"
+
+        s3Client.putObject(
+            PutObjectRequest.builder()
+                .bucket(bucket)
+                .key(fileName)
+                .build(),
+            RequestBody.fromBytes(fileBytes)
         )
 
         return "$endpoint/$bucket/$fileName"

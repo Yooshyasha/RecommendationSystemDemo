@@ -1,4 +1,4 @@
-package com.yooshyasha.videoservice.s3
+package com.yooshyasha.videopublishservice.s3
 
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean

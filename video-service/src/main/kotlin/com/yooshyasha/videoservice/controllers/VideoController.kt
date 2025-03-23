@@ -18,7 +18,7 @@ class VideoController(
     @PostMapping("/video")
     fun postVideo(publishData: RequestPublishVideo): ResponseEntity<Video> {
         try {
-            val video = videoService.publishVideo(
+            val video = videoService.requestPublishVideo(
                 file = publishData.file,
                 title = publishData.title,
                 description = publishData.description,

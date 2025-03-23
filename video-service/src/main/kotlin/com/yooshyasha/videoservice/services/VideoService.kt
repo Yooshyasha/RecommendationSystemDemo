@@ -9,33 +9,33 @@ import java.util.*
 
 @Service
 class VideoService(
-    private val s3Service: S3Service,
     private val usersService: UsersService,
     private val videoRepository: VideoRepository,
+    private val videoPublishService: VideoPublishService,
 ) {
-    fun publishVideo(
+    fun requestPublishVideo(
         file: MultipartFile,
         title: String,
         description: String,
         isPublic: Boolean,
         authorId: UUID
     ): Video {
-        val url = s3Service.uploadFile(file)
 
         val video = Video(
             isPublic = isPublic,
             authorId = authorId,
             title = title,
             description = description,
-            fileUrl = url
         )
 
         saveVideo(video)
 
+        videoPublishService.publishVideo(video, file)
+
         return video
     }
 
-    fun publishVideo(
+    fun requestPublishVideo(
         file: MultipartFile,
         title: String,
         description: String,
@@ -44,7 +44,7 @@ class VideoService(
         val name = SecurityContextHolder.getContext().authentication.name
         val me = usersService.getUserByUsername(name)
 
-        return publishVideo(file, title, description, isPublic, me.id)
+        return requestPublishVideo(file, title, description, isPublic, me.id)
     }
 
     fun saveVideo(video: Video) {
