@@ -1,4 +1,4 @@
-package com.yooshyasha.recommendationservice.repos.repos
+package com.yooshyasha.recommendationservice.repos
 
 import com.yooshyasha.recommendationservice.enities.RecommendationTreeVideoEntity
 import org.springframework.data.jpa.repository.JpaRepository
