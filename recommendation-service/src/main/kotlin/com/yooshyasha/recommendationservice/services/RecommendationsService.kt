@@ -5,15 +5,14 @@ import com.yooshyasha.recommendationservice.enities.RecommendationTreeNodeVideoE
 import com.yooshyasha.recommendationservice.enities.Video
 import com.yooshyasha.recommendationservice.feign.UserServiceClient
 import com.yooshyasha.recommendationservice.repos.UserRecommendationTreeRepository
-import com.yooshyasha.recommendationservice.repos.VideoRecommendationTreeNodes
-import com.yooshyasha.recommendationservice.repos.VideoRepository
+import com.yooshyasha.recommendationservice.repos.VideoRecommendationTreeRepository
 import org.springframework.stereotype.Service
 
 @Service
 class RecommendationsService(
-    private val videoRecommendationTreeRepository: VideoRecommendationTreeNodes,
+    private val videoRecommendationTreeRepository: VideoRecommendationTreeRepository,
     private val userRecommendationTreeRepository: UserRecommendationTreeRepository,
-    private val videoRepository: VideoRepository,
+    private val videoService: VideoService,
     private val userServiceClient: UserServiceClient,
 ) {
     fun getFullUserRecommendationTree(recommendationTreeRoot: RecommendationTreeNodeUserEntity): Collection<Float> {
@@ -73,7 +72,7 @@ class RecommendationsService(
     }
 
     fun getSortedVideoList(userTree: Collection<Float>): List<Video> {
-        val videos = videoRepository.findAll()
+        val videos = videoService.getAllVideos()
 
         return videos.sortedBy { video ->
             val rootRecommendationTree = videoRecommendationTreeRepository.findAllByVideo(video)
