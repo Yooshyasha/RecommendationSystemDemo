@@ -2,6 +2,7 @@ package com.yooshyasha.recommendationservice.services
 
 import com.yooshyasha.recommendationservice.enities.RecommendationTreeNodeUserEntity
 import com.yooshyasha.recommendationservice.enities.RecommendationTreeNodeVideoEntity
+import com.yooshyasha.recommendationservice.enities.User
 import com.yooshyasha.recommendationservice.enities.Video
 import com.yooshyasha.recommendationservice.feign.UserServiceClient
 import com.yooshyasha.recommendationservice.repos.UserRecommendationTreeRepository
@@ -93,4 +94,21 @@ class RecommendationsService(
 
         return getSortedVideoList(userTreeNodes)
     }
+
+    fun generateVideoTree(video: Video): Collection<Float> {
+        var latestNode: RecommendationTreeNodeVideoEntity = RecommendationTreeNodeVideoEntity(video = video, value = 1f)
+        for (i in (0..10)) {
+            videoRecommendationTreeRepository.save(latestNode)
+            latestNode = RecommendationTreeNodeVideoEntity(video = video, value = 2f, parent = latestNode)
+        }
+
+        return getFullVideoRecommendationTree(
+            videoRecommendationTreeRepository.findAllByVideo(video)
+                .maxByOrNull { it.parent == null }!!
+        )
+    }
+
+//    fun markVideoAsWatched(video: Video, user: User) {
+//        TODO()
+//    }
 }

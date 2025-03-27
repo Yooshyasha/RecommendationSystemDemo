@@ -17,7 +17,7 @@ data class RecommendationTreeNodeVideoEntity(
 
     @ManyToOne(targetEntity = RecommendationTreeNodeVideoEntity::class)
     @Nullable
-    val parent: RecommendationTreeNodeVideoEntity? = null,
+    var parent: RecommendationTreeNodeVideoEntity? = null,
 ) {
     fun getPayload(): Any {
         return value
