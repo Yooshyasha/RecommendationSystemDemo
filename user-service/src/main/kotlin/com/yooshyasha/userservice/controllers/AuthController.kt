@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
@@ -18,7 +19,7 @@ class AuthController(
     private val authService: AuthService,
 ) {
     @PostMapping("/login")
-    fun login(loginData: RequestLogin): ResponseEntity<ResponseLogin> {
+    fun login(@RequestBody loginData: RequestLogin): ResponseEntity<ResponseLogin> {
         try {
             val result = authService.login(loginData.username, loginData.password)
 
@@ -32,7 +33,7 @@ class AuthController(
     }
 
     @PostMapping("/register")
-    fun register(registerData: RequestRegister): ResponseEntity<ResponseRegister> {
+    fun register(@RequestBody registerData: RequestRegister): ResponseEntity<ResponseRegister> {
         try {
             val result = authService.register(registerData.username, registerData.password)
 
