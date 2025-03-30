@@ -33,7 +33,7 @@ class UserControllerTest {
 
     @Test
     fun getMe() {
-        val user = User(name = "yooshyasha")
+        val user = User(id = UUID.randomUUID(), name = "yooshyasha")
 
         Mockito.`when`(usersService.getMe()).thenReturn(user)
 
@@ -41,7 +41,7 @@ class UserControllerTest {
             MockMvcRequestBuilders.get("/v1/users/me")
         )
             .andExpect(status().isOk)
-            .andExpect(jsonPath("$.username").value(user.username))
+            .andExpect(jsonPath("$.name").value(user.username))
     }
 
     @Test
@@ -54,6 +54,6 @@ class UserControllerTest {
             MockMvcRequestBuilders.get("/v1/users/${user.id}")
         )
             .andExpect(status().isOk)
-            .andExpect(jsonPath("$.username").value(user.username))
+            .andExpect(jsonPath("$.name").value(user.username))
     }
 }
